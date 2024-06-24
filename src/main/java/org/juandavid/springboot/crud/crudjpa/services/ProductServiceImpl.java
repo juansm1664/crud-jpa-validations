@@ -13,13 +13,14 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductRepository productRepository; //Inyección del repositorio ProductRepository
 
     @Override
     @Transactional(readOnly = true)
     public List<Product> findAll() {
         return (List<Product>) productRepository.findAll();
     }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<Product> findById(Long id) {
@@ -54,4 +55,5 @@ public class ProductServiceImpl implements ProductService {
         });
         return productDb;
     }
+
 }

@@ -2,6 +2,7 @@ package org.juandavid.springboot.crud.crudjpa.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name="products")
@@ -11,8 +12,15 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "{NotEmpty.product.name}") //No permite atributo vacío
+    @Size(min=4, max=20) //define el tamaño del atributo
     private String name;
+
+    @Min(100) // valor numeric mín requerido
+    @NotNull //No permite valores nulos
     private Integer price;
+
+    @NotBlank(message = "{NotBlank.product.description}") //No permite atributo vacío, Ni espacio en blanco
     private String description;
 
     public Product() {
