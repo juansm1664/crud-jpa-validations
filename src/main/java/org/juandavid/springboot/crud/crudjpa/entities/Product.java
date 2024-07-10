@@ -3,6 +3,8 @@ package org.juandavid.springboot.crud.crudjpa.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.juandavid.springboot.crud.crudjpa.validation.IsExistsDb;
+import org.juandavid.springboot.crud.crudjpa.validation.IsRequired;
 
 @Entity
 @Table(name="products")
@@ -11,6 +13,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @IsRequired
+    @IsExistsDb
+    private String sku;
 
     @NotEmpty(message = "{NotEmpty.product.name}") //No permite atributo vacío
     @Size(min=4, max=20) //define el tamaño del atributo
@@ -56,5 +62,13 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 }
